@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var ADS_NUMBER = 8;
 var MIN_PRICE = 1000;

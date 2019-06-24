@@ -23,21 +23,10 @@ var HOUSE_TITLE = ['Большая уютная квартира', 'Малень
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-var MAP = document.querySelector('.map');
 
-
-// Function to get a random feature
-function getRandomFutures(arr) {
-  var features = [];
-  var featuresAmount = Math.floor(Math.random() * (FEATURES.length + 1));
-  for (var i = 0; i < featuresAmount; i++) {
-    features.push(arr[i]);
-  }
-  return features;
-}
-// Function to get a random value in a specified range
+  // Function to get a random value in a specified range
 var getRandomNum = function (min, max) {
-  return Math.floor(Math.random() * max) + min;
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
 // Function to get a random value from array
@@ -88,7 +77,7 @@ var createAd = function (advCount) {
         guests: getRandomNum(MIN_GUESTS, MAX_GUEST),
         checkin: getRandomValue(CHECKIN_TIME),
         checkout: getRandomValue(CHECKOUT_TIME),
-        features: getRandomFutures(FEATURES),
+        features: getRandomValue(FEATURES),
         description: '',
         photos: getShuffledPhotos(PHOTOS)
       },
@@ -103,7 +92,8 @@ var createAd = function (advCount) {
 };
 
 // Removing class faded
-MAP.classList.remove('map--faded');
+var map = document.querySelector('.map');
+map.classList.remove('map--faded');
 var ads = createAd(ADS_NUMBER); // Заношу фун-ию createAd в переменную для удобства использования
 
 // В данной фун-ии мы создаем на карте пины с потенциальными объявлениями в рандомных местах.

@@ -125,8 +125,8 @@ var setAdress = function (x, y) {
 
 // Disables all forms
 var disableField = function () {
-  fieldset.forEach(function (item, i) {
-    fieldset[i].disabled = true;
+  fieldset.forEach(function (item) {
+    item.disabled = true;
   });
   setAdress(MAP_WIDTH / 2, MAP_HEIGHT / 2);
 };
@@ -146,12 +146,6 @@ var activatePage = function () {
 };
 
 mainPin.addEventListener('click', function (evt) {
-  evt.preventDefault();
-  activatePage();
-  renderPins(ads);
-});
-
-mainPin.addEventListener('keypress', function (evt) {
   evt.preventDefault();
   activatePage();
   renderPins(ads);

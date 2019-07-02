@@ -11,6 +11,8 @@ var MAX_X = 1000;
 var MIN_X = 250;
 var MAX_Y = 630;
 var MIN_Y = 130;
+var MAP_WIDTH = 1140;
+var MAP_HEIGHT = 750;
 var HOUSE_TYPE = ['palace', 'flat', 'house', 'bungalo'];
 var CHECKIN_TIME = ['12:00', '13:00', '14:00'];
 var CHECKOUT_TIME = CHECKIN_TIME;
@@ -93,7 +95,6 @@ var createAd = function (advCount) {
 
 // Removing class faded
 var map = document.querySelector('.map');
-map.classList.remove('map--faded');
 var ads = createAd(ADS_NUMBER); // Заношу фун-ию createAd в переменную для удобства использования
 
 // В данной фун-ии мы создаем на карте пины с потенциальными объявлениями в рандомных местах.
@@ -112,4 +113,40 @@ function renderPins(adverts) {
   });
 }
 
-renderPins(ads); // Выполняем функцию
+// Enables all forms on click
+var inputAdress = document.querySelector('#address');
+var mainPin = document.querySelector('.map__pin--main');
+var fieldset = document.querySelectorAll('fieldset');
+
+// Function to set address to input
+var setAdress = function (x, y) {
+  inputAdress.value = x + ',' + y;
+};
+
+// Disables all forms
+var disableField = function () {
+  fieldset.forEach(function (item) {
+    item.disabled = true;
+  });
+  setAdress(MAP_WIDTH / 2, MAP_HEIGHT / 2);
+};
+disableField();
+
+var activatePage = function () {
+  map.classList.remove('map--faded');
+  disableField();
+
+  var advertForm = document.querySelector('.ad-form');
+  advertForm.classList.remove('ad-form--disabled');
+  // var select = document.querySelectorAll('select');
+
+  fieldset.forEach(function (item) {
+    item.disabled = false;
+  });
+};
+
+mainPin.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  activatePage();
+  renderPins(ads);
+});

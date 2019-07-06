@@ -134,11 +134,9 @@ disableField();
 
 var activatePage = function () {
   map.classList.remove('map--faded');
-  disableField();
 
   var advertForm = document.querySelector('.ad-form');
   advertForm.classList.remove('ad-form--disabled');
-  // var select = document.querySelectorAll('select');
 
   fieldset.forEach(function (item) {
     item.disabled = false;
@@ -203,15 +201,13 @@ var moveIn = document.getElementById('timein');
 var moveOut = document.getElementById('timeout');
 
 var timeIn = function () {
-  if (moveOut.value !== moveIn.value) {
-    moveOut.value = moveIn.value;
-  }
+  moveOut.value = moveIn.value;
+
 };
 
 var timeOut = function () {
-  if (moveIn.value !== moveOut.value) {
-    moveIn.value = moveOut.value;
-  }
+  moveIn.value = moveOut.value;
+
 };
 
 moveIn.addEventListener('input', timeIn);
@@ -220,7 +216,6 @@ moveOut.addEventListener('input', timeOut);
 // Drag of the main pin
 mainPin.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
-
   var startCoords = {
     x: evt.clientX,
     y: evt.clientY

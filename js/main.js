@@ -134,11 +134,9 @@ disableField();
 
 var activatePage = function () {
   map.classList.remove('map--faded');
-  disableField();
 
   var advertForm = document.querySelector('.ad-form');
   advertForm.classList.remove('ad-form--disabled');
-  // var select = document.querySelectorAll('select');
 
   fieldset.forEach(function (item) {
     item.disabled = false;
@@ -149,4 +147,125 @@ mainPin.addEventListener('click', function (evt) {
   evt.preventDefault();
   activatePage();
   renderPins(ads);
+});
+
+// Form validation
+var hometypeInput = document.getElementById('type');
+var rentPrice = document.getElementById('price');
+
+var housePrice = {
+  'bungalo': {
+    min: '0',
+    placeholder: '0'
+  },
+  'flat': {
+    min: '1000',
+    placeholder: '1000'
+  },
+  'house': {
+    min: '5000',
+    placeholder: '5000'
+  },
+  'palace': {
+    min: '10000',
+    placeholder: '10000'
+  },
+};
+
+var pricetoHouse = function () {
+  switch (hometypeInput.value) {
+    case 'bungalo':
+      rentPrice.min = housePrice.bungalo.min;
+      rentPrice.placeholder = housePrice.bungalo.placeholder;
+      return;
+    case 'flat':
+      rentPrice.min = housePrice.flat.min;
+      rentPrice.placeholder = housePrice.flat.placeholder;
+      return;
+    case 'house':
+      rentPrice.min = housePrice.house.min;
+      rentPrice.placeholder = housePrice.house.placeholder;
+      return;
+    case 'palace':
+      rentPrice.min = housePrice.palace.min;
+      rentPrice.placeholder = housePrice.palace.placeholder;
+      return;
+
+  }
+};
+
+hometypeInput.addEventListener('input', pricetoHouse);
+
+// Moving in moving out time relation
+var moveIn = document.getElementById('timein');
+var moveOut = document.getElementById('timeout');
+
+var timeIn = function () {
+  moveOut.value = moveIn.value;
+
+};
+
+var timeOut = function () {
+  moveIn.value = moveOut.value;
+
+};
+
+moveIn.addEventListener('input', timeIn);
+moveOut.addEventListener('input', timeOut);
+
+// Drag of the main pin
+mainPin.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var isDragged = false;
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+    isDragged = true;
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    var yCoordinate = mainPin.offsetTop - shift.y;
+    var xCoordinate = mainPin.offsetLeft - shift.x;
+
+    setAdress(xCoordinate, yCoordinate);
+
+    if (yCoordinate < MAX_Y && yCoordinate > MIN_Y) {
+      mainPin.style.top = yCoordinate + 'px';
+    }
+
+    if (xCoordinate < MAX_X && xCoordinate > MIN_X) {
+      mainPin.style.left = xCoordinate + 'px';
+    }
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+
+    if (isDragged) {
+      var onClickPreventDefault = function (deleteEvt) {
+        deleteEvt.preventDefault();
+        mainPin.removeEventListener('click', onClickPreventDefault);
+      };
+      mainPin.addEventListener('click', onClickPreventDefault);
+    }
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });

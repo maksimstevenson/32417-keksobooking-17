@@ -265,7 +265,6 @@ mainPin.addEventListener('mousedown', function (evt) {
       mainPin.addEventListener('click', onClickPreventDefault);
     }
   };
-
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });

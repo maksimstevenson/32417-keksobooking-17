@@ -44,6 +44,30 @@
         fragment.appendChild(pinElement); // С помощью метода appendChild назначаю данные фрагменту
         template.appendChild(fragment); // Используя тот же метод назначаю фрагмент с заданными параметрами в template
       });
-    }
+    },
+    // A function to disable all fields
+    disableField: function () {
+      window.data.fieldset.forEach(function (item) {
+        item.disabled = true;
+      });
+      window.utils.setAdress(window.data.MAP_WIDTH / 2, window.data.MAP_HEIGHT / 2);
+    },
+    // A function to activate map
+    activateMap: function () {
+      window.data.map.classList.remove('map--faded');
+    },
+    // A function to activate all fields
+    activatePage: function () {
+      window.utils.disableField();
+      var advertForm = document.querySelector('.ad-form');
+      advertForm.classList.remove('ad-form--disabled');
+
+      window.data.fieldset.forEach(function (item) {
+        item.disabled = false;
+      });
+    },
+    checkMapStatus: function () {
+      return window.data.map.classList.contains('map--faded');
+    },
   };
 })();

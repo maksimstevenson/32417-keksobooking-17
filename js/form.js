@@ -2,29 +2,8 @@
 
 (function () {
 
-  var disableField = function () {
-    window.data.fieldset.forEach(function (item) {
-      item.disabled = true;
-    });
-    window.utils.setAdress(window.data.MAP_WIDTH / 2, window.data.MAP_HEIGHT / 2);
-  };
-  disableField();
-
-  var activatePage = function () {
-    window.data.map.classList.remove('map--faded');
-
-    var advertForm = document.querySelector('.ad-form');
-    advertForm.classList.remove('ad-form--disabled');
-
-    window.data.fieldset.forEach(function (item) {
-      item.disabled = false;
-    });
-  };
-
   window.data.mainPin.addEventListener('click', function (evt) {
     evt.preventDefault();
-    activatePage();
-    window.utils.renderPins(window.card.createAd(window.data.ADS_NUMBER));
   });
 
   var housePrice = {

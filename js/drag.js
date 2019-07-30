@@ -7,7 +7,7 @@
     window.data.mainPin.setAttribute('draggable', true);
     window.utils.activateMap();
     if (mapActive) {
-      window.utils.renderPins(window.card.createAd(window.data.ADS_NUMBER));
+      window.card.renderPins;
 
     }
 

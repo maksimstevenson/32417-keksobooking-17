@@ -55,6 +55,7 @@
     // A function to activate map
     activateMap: function () {
       window.data.map.classList.remove('map--faded');
+      window.load.loadData(window.data.URL, window.card.renderPins, window.card.errorHandler );
     },
     // A function to activate all fields
     activatePage: function () {

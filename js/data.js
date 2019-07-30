@@ -29,10 +29,14 @@
       'http://o0.github.io/assets/images/tokyo/hotel3.jpg'],
     // DOM elements
     map: document.querySelector('.map'),
+    similarAdsList: document.querySelector('.map__pins'),
+    similarAdPinTemplate: document.querySelector('#pin').content.querySelector('.map__pin'),
     inputAdress: document.querySelector('#address'),
     mainPin: document.querySelector('.map__pin--main'),
     fieldset: document.querySelectorAll('fieldset'),
     hometypeInput: document.getElementById('type'),
     rentPrice: document.getElementById('price'),
+    // JSON
+    URL:'https://js.dump.academy/keksobooking/data',
   };
 })();

@@ -6,6 +6,7 @@
     evt.preventDefault();
     window.data.mainPin.setAttribute('draggable', true);
     window.utils.activateMap();
+    window.utils.activatePage();
     if (mapActive) {
       window.card.renderPins;
 
@@ -19,7 +20,6 @@
     var isDragged = false;
 
     var onMouseMove = function (moveEvt) {
-      window.utils.activatePage();
       moveEvt.preventDefault();
       isDragged = true;
 

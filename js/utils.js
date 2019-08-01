@@ -31,19 +31,26 @@
     setAdress: function (x, y) {
       window.data.inputAdress.value = x + ',' + y;
     },
-    // Function to create pins
-    renderPins: function (adverts) {
-      var template = document.querySelector('.map__pins'); // Переменная содержащая элемент в который добавляется пин
-      var mapPin = document.querySelector('#pin').content.querySelector('.map__pin'); // Переменная для обращения к шаблону пина
-      var fragment = document.createDocumentFragment(); // Фрагмент в котором хранится новый пин
+    renderAd: function (similarOffer) {
+      var offerElement = window.data.similarAdPinTemplate.cloneNode(true);
+      var offerElementImage = offerElement.querySelector('img');
+      offerElement.style = 'left: ' + similarOffer.location.x + 'px; ' + 'top: ' + similarOffer.location.y + 'px';
+      offerElementImage.src = similarOffer.author.avatar;
+      return offerElement;
+    },
+    // A function to create pins
+    renderPins: function (offers) {
+      var fragment = document.createDocumentFragment();
+      for (var i = 0; i < offers.length; i++) {
+        fragment.appendChild(window.utils.renderAd(offers[i]));
+      }
+      window.data.similarAdsList.appendChild(fragment);
+    },
 
-      adverts.forEach(function (item) { // Используем метод forEach для прочесывания каждого элмената массива и создания пина для каждого отдельного элемента
-        var pinElement = mapPin.cloneNode(true); // Копируем содержимое шаблона .map__pin и заносим в переменную для удобства использования
-        pinElement.querySelector('img').setAttribute('src', item.author.avatar); // обращаемся к содержимому и назначаем атрибут
-        pinElement.setAttribute('style', 'left: ' + item.location.x + 'px; ' + 'top: ' + item.location.y + 'px');// Задаем позицию пина через атрибут
-        fragment.appendChild(pinElement); // С помощью метода appendChild назначаю данные фрагменту
-        template.appendChild(fragment); // Используя тот же метод назначаю фрагмент с заданными параметрами в template
-      });
+    errorHandler: function () {
+      var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+      var errorMessage = errorMessageTemplate.cloneNode(true);
+      document.body.insertBefore(errorMessage, document.body.children[2]);
     },
     // A function to disable all fields
     disableField: function () {
@@ -55,6 +62,7 @@
     // A function to activate map
     activateMap: function () {
       window.data.map.classList.remove('map--faded');
+      window.load.loadData(window.data.URL, window.utils.renderPins, window.utils.errorHandler);
     },
     // A function to activate all fields
     activatePage: function () {

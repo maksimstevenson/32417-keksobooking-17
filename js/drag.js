@@ -2,14 +2,10 @@
 
 (function () {
   window.data.mainPin.addEventListener('mousedown', function (evt) {
-    var mapActive = window.utils.checkMapStatus();
     evt.preventDefault();
     window.data.mainPin.setAttribute('draggable', true);
     window.utils.activateMap();
-    if (mapActive) {
-      window.utils.renderPins(window.card.createAd(window.data.ADS_NUMBER));
-
-    }
+    window.utils.activatePage();
 
     var startCoords = {
       x: evt.clientX,
@@ -19,7 +15,6 @@
     var isDragged = false;
 
     var onMouseMove = function (moveEvt) {
-      window.utils.activatePage();
       moveEvt.preventDefault();
       isDragged = true;
 

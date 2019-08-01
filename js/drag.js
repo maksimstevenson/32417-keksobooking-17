@@ -2,15 +2,10 @@
 
 (function () {
   window.data.mainPin.addEventListener('mousedown', function (evt) {
-    var mapActive = window.utils.checkMapStatus();
     evt.preventDefault();
     window.data.mainPin.setAttribute('draggable', true);
     window.utils.activateMap();
     window.utils.activatePage();
-    if (mapActive) {
-
-      window.card.renderPins();
-    }
 
     var startCoords = {
       x: evt.clientX,

@@ -8,8 +8,8 @@
     window.utils.activateMap();
     window.utils.activatePage();
     if (mapActive) {
-      window.card.renderPins;
 
+      window.card.renderPins();
     }
 
     var startCoords = {

@@ -37,6 +37,6 @@
     hometypeInput: document.getElementById('type'),
     rentPrice: document.getElementById('price'),
     // JSON
-    URL:'https://js.dump.academy/keksobooking/data',
+    URL: 'https://js.dump.academy/keksobooking/data',
   };
 })();

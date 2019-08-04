@@ -39,10 +39,11 @@
       return offerElement;
     },
     // A function to create pins
-    renderPins: function (offers) {
+    renderPins: function (ads) {
+      ads = ads.slice(0, 5);
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < offers.length; i++) {
-        fragment.appendChild(window.utils.renderAd(offers[i]));
+      for (var i = 0; i < ads.length; i++) {
+        fragment.appendChild(window.utils.renderAd(window.data.offers[i]));
       }
       window.data.similarAdsList.appendChild(fragment);
     },
@@ -51,6 +52,9 @@
       var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
       var errorMessage = errorMessageTemplate.cloneNode(true);
       document.body.insertBefore(errorMessage, document.body.children[2]);
+    },
+    successHandler: function (data) {
+      window.data.offers = data;
     },
     // A function to disable all fields
     disableField: function () {
@@ -76,6 +80,21 @@
     },
     checkMapStatus: function () {
       return window.data.map.classList.contains('map--faded');
+    },
+    // A function to clear map off pins
+    clearMap: function () {
+      var offerPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+
+      offerPins.forEach(function (offerPin) {
+        offerPin.remove();
+      });
+    },
+    updatePins: function () {
+      window.utils.clearMap();
+      var filteredOffers = window.data.offers.filter(function (offer) {
+        return offer.offer.type === window.data.housingType.value || window.data.housingType === 'any';
+      });
+      window.utils.renderPins(filteredOffers);
     },
   };
 })();

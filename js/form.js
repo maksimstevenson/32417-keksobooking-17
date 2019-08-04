@@ -66,3 +66,6 @@
   moveIn.addEventListener('input', timeIn);
   moveOut.addEventListener('input', timeOut);
 })();
+
+window.data.housingType.addEventListener('change', window.utils.updateOffers);
+window.load.loadData(window.data.DATA_URL, window.utils.successHandler, window.utils.errorHandler);

@@ -68,4 +68,4 @@
 })();
 
 window.data.housingType.addEventListener('change', window.utils.updateOffers);
-window.load.loadData(window.data.DATA_URL, window.utils.successHandler, window.utils.errorHandler);
+window.load.loadData(window.data.URL, window.utils.successHandler, window.utils.errorHandler);

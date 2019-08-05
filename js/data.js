@@ -27,6 +27,7 @@
     PHOTOS: ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
       'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
       'http://o0.github.io/assets/images/tokyo/hotel3.jpg'],
+    offers: [],
     // DOM elements
     map: document.querySelector('.map'),
     similarAdsList: document.querySelector('.map__pins'),
@@ -36,6 +37,7 @@
     fieldset: document.querySelectorAll('fieldset'),
     hometypeInput: document.getElementById('type'),
     rentPrice: document.getElementById('price'),
+    housingType: document.querySelector('#housing-type'),
     // JSON
     URL: 'https://js.dump.academy/keksobooking/data',
   };

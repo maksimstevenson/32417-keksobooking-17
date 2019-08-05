@@ -25,6 +25,7 @@
     xhr.timeout = 10000;
 
     xhr.open('GET', url);
+    // debugger;
     xhr.send();
   };
 

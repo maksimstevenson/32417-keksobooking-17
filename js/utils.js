@@ -36,6 +36,11 @@
       var offerElementImage = offerElement.querySelector('img');
       offerElement.style = 'left: ' + similarOffer.location.x + 'px; ' + 'top: ' + similarOffer.location.y + 'px';
       offerElementImage.src = similarOffer.author.avatar;
+      offerElementImage.alt = similarOffer.offer.description;
+      offerElement.addEventListener('click', function () {
+        window.card.showCard(similarOffer);
+        offerElement.classList.add('map__pin--active');
+      });
       return offerElement;
     },
     // A function to create pins
@@ -98,3 +103,4 @@
     },
   };
 })();
+

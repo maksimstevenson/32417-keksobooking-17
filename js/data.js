@@ -27,6 +27,22 @@
     PHOTOS: ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
       'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
       'http://o0.github.io/assets/images/tokyo/hotel3.jpg'],
+    KeyCodes: {
+      ENTER: 13,
+      ESC: 27
+    },
+    OffersType: {
+      bungalo: 'Бунгало',
+      flat: 'Квартира',
+      house: 'Дом',
+      palace: 'Дворец'
+    },
+    RoomsCapacity: {
+      1: ['1'],
+      2: ['1', '2'],
+      3: ['1', '2', '3'],
+      100: ['0']
+    },
     offers: [],
     // DOM elements
     map: document.querySelector('.map'),
@@ -38,6 +54,8 @@
     hometypeInput: document.getElementById('type'),
     rentPrice: document.getElementById('price'),
     housingType: document.querySelector('#housing-type'),
+    cardsContainer: document.querySelector('.map__filters-container'),
+    cardTemplate: document.querySelector('#card').content.querySelector('.map__card'),
     // JSON
     URL: 'https://js.dump.academy/keksobooking/data',
   };

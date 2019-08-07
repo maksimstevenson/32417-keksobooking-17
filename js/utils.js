@@ -94,6 +94,7 @@
         offerPin.remove();
       });
     },
+
     updatePins: function () {
       window.utils.clearMap();
       var filteredOffers = window.data.offers.filter(function (offer) {

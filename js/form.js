@@ -70,6 +70,16 @@
 window.data.housingType.addEventListener('change', window.utils.updateOffers);
 window.load.loadData(window.data.URL, window.utils.successHandler, window.utils.errorHandler);
 
+var deactivatePage = function () {
+  window.card.closeCard();
+  window.utils.disableField(window.data.fieldset);
+  window.data.map.classList.add('map--faded');
+  window.data.adForm.classList.add('ad-form--disabled');
+  window.utils.clearMap();
+  window.data.mainPin.addEventListener('click', window.utils.activatePage);
+  window.data.adForm.reset();
+};
+
 var adFormSuccessHandler = function () {
   var successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
   var successMessage = successMessageTemplate.cloneNode(true);
@@ -90,6 +100,7 @@ var adFormSuccessHandler = function () {
   document.addEventListener('click', onMouseClick);
   document.addEventListener('keydown', onEscPress);
   document.body.insertBefore(successMessage, document.body.children[0]);
+  deactivatePage();
 };
 
 window.data.roomSelect.addEventListener('change', window.utils.setCapacity);

@@ -69,3 +69,32 @@
 
 window.data.housingType.addEventListener('change', window.utils.updateOffers);
 window.load.loadData(window.data.URL, window.utils.successHandler, window.utils.errorHandler);
+
+var adFormSuccessHandler = function () {
+  var successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+  var successMessage = successMessageTemplate.cloneNode(true);
+  var onEscPress = function (evt) {
+    evt.preventDefault();
+    if (evt.keyCode === window.util.KeyCodes.ESC) {
+      successMessage.remove();
+      document.removeEventListener('keydown', onEscPress);
+      document.removeEventListener('click', onMouseClick);
+    }
+  };
+  var onMouseClick = function (evt) {
+    evt.preventDefault();
+    successMessage.remove();
+    document.removeEventListener('click', onMouseClick);
+    document.removeEventListener('keydown', onEscPress);
+  };
+  document.addEventListener('click', onMouseClick);
+  document.addEventListener('keydown', onEscPress);
+  document.body.insertBefore(successMessage, document.body.children[0]);
+};
+
+window.data.roomSelect.addEventListener('change', window.utils.setCapacity);
+
+window.data.adForm.addEventListener('submit', function (evt) {
+  window.load.uploadData(new FormData(window.data.adForm), adFormSuccessHandler, window.utils.errorHandler);
+  evt.preventDefault();
+});

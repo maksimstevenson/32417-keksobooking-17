@@ -56,6 +56,20 @@
     errorHandler: function () {
       var errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
       var errorMessage = errorMessageTemplate.cloneNode(true);
+      var errorButton = errorMessage.querySelector('.error__button');
+      var onEscPress = function (evt) {
+        evt.preventDefault();
+        if (evt.keyCode === window.data.KeyCodes.ESC) {
+          errorMessage.remove();
+          document.removeEventListener('keydown', onEscPress);
+        }
+      };
+      var onMouseClick = function (evt) {
+        evt.preventDefault();
+        errorMessage.remove();
+      };
+      document.addEventListener('keydown', onEscPress);
+      errorButton.addEventListener('click', onMouseClick);
       document.body.insertBefore(errorMessage, document.body.children[2]);
     },
     successHandler: function (data) {
@@ -82,6 +96,7 @@
       window.data.fieldset.forEach(function (item) {
         item.disabled = false;
       });
+      window.utils.setCapacity();
     },
     checkMapStatus: function () {
       return window.data.map.classList.contains('map--faded');
@@ -101,6 +116,24 @@
         return offer.offer.type === window.data.housingType.value || window.data.housingType === 'any';
       });
       window.utils.renderPins(filteredOffers);
+    },
+    // A function for syncronisation of fields
+    syncSelects: function (firstSelect, secondSelect) {
+      secondSelect.value = firstSelect.value;
+    },
+    setCapacity: function () {
+      Array.from(window.data.guestsSelect.options).forEach(function (option, index) {
+        window.data.guestsSelect.options[index].setAttribute('disabled', 'true');
+        if (window.data.RoomsCapacity[window.data.roomSelect.value].indexOf(window.data.guestsSelect.options[index].value) !== -1) {
+          window.data.guestsSelect.options[index].removeAttribute('disabled');
+        }
+      });
+      if (window.data.guestsSelect.value !== window.data.roomSelect.value) {
+        window.utils.syncSelects(window.data.roomSelect, window.data.guestsSelect);
+      }
+      if (window.data.roomSelect.value === '100') {
+        window.data.guestsSelect.selectedIndex = 3;
+      }
     },
   };
 })();

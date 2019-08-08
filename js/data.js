@@ -51,12 +51,17 @@
     inputAdress: document.querySelector('#address'),
     mainPin: document.querySelector('.map__pin--main'),
     fieldset: document.querySelectorAll('fieldset'),
+    adForm: document.querySelector('.ad-form'),
     hometypeInput: document.getElementById('type'),
     rentPrice: document.getElementById('price'),
     housingType: document.querySelector('#housing-type'),
     cardsContainer: document.querySelector('.map__filters-container'),
     cardTemplate: document.querySelector('#card').content.querySelector('.map__card'),
+    offerAddress: document.querySelector('#address'),
+    roomSelect: document.querySelector('#room_number'),
+    guestsSelect: document.querySelector('#capacity'),
     // JSON
     URL: 'https://js.dump.academy/keksobooking/data',
+    FORM_URL: 'https://js.dump.academy/keksobooking',
   };
 })();
